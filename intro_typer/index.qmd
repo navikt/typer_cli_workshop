@@ -1,0 +1,266 @@
+# Hva er typer?
+
+### Hva er typer?
+
+- Bestemmer hvordan en variabel oppfører seg
+
+. . .
+
+- Kontrakt mellom program og programmerer
+
+. . .
+
+- Ønsker å minimere feil (🐛) i programmet
+
+### Hva er typer?
+
+Vi skiller gjerne på sterkttypet og svakttypet programmeringsspråk
+
+. . .
+
+:::: {.columns}
+
+::: {.column width="50%"}
+#### C
+```c
+int a = 1;
+float b = 2.;
+a + b
+```
+:::
+
+::: {.column width="50%"}
+#### Rust
+```rust
+let a = 1i32;
+let b = 2f32;
+a + b
+```
+Feil: `no implementation for 'i32 + f32'`
+:::
+
+::::
+
+### Hva er typer?
+
+:::: {.columns}
+
+::: {.column width="60%"}
+- Vi kan gå enda lengre enn typene vi er vandt med fra Python.
+- I Haskell kan man se på metode deklarasjonen om metoden kommer til å benytte
+`IO`.
+:::
+
+:::{.column width="40%"}
+#### Haskell
+```haskell
+-- putChar kan skrive til terminal
+putChar :: Char -> IO ()
+
+-- leggTil kan _ikke_ skrive til terminal
+leggTil :: Int -> Int
+leggTil a = a + 1
+```
+:::
+
+::::
+
+### Hva er typer?
+
+- Eller vi kan gå andre veien...
+- Javascript 🤦
+
+```js
+console.log(new Array(5).join("a"-10) + " Batman!")
+
+// Skriver ut 'NaNNaNNaNNaN Batman!'
+```
+
+## Typer i Python
+
+### Typer i Python
+- Sterkt
+- Dynamisk
+- 🦆
+
+### Python er sterkt typet
+
+```python
+a = "hei"
+b = 3
+a + b
+```
+
+. . .
+
+```{.bash code-line-numbers="false"}
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: can only concatenate str (not "int") to str
+```
+
+### Python er dynamisk
+
+```python
+import random
+
+a = "hei"
+b = 3
+
+if random.random() > 0.9:
+    a + b
+```
+
+### Python er 🦆
+
+> If it looks like a duck, swims like a duck, and quacks like a duck, then it
+> probably is a duck.
+
+. . .
+
+```python
+def skriv_ut(a):
+    for element in a:
+        print(element)
+
+skriv_ut([1, 2, 3])
+skriv_ut({"a": 1, "b": 2})
+```
+
+# Hvordan kan jeg bruke typer?
+
+## Merk kode i Python
+
+### Merk kode i Python
+
+- Python fikk støtte for å merke kode i versjon `3.5`
+- For å merke kode legger man ofte bare til hvilken type man forventer bak `:`
+
+. . .
+
+```python
+a: int = 1
+b: float = 2.
+c: list[int] = [1, 2, 3]
+```
+
+### Merk kode i Python
+
+- For metoder så bruker vi `:` og `->`
+  - `:` for variabler
+  - `->` for typen til returverdien
+
+```python
+from typing import Any
+
+def skriv_ut(a: list[Any]) -> None:
+    for element in a:
+        print(element)
+```
+
+### Merk kode i Python
+
+- `list` kan være litt begrensende, bare lister ikke `dict`...
+- Benytt
+[`collections.abc`](https://docs.python.org/3/library/collections.abc.html) og
+[`typing`](https://docs.python.org/3/library/typing.html)
+
+```python
+from collections.abc import Iterable
+from typing import Any
+
+def skriv_ut(a: Iterable[Any]) -> None:
+    for element in a:
+        print(element)
+```
+
+### Merk kode i Python
+
+```{.python code-line-numbers="|6"}
+from collections.abc import Iterable
+from typing import Any
+
+def skriv_ut(
+    a: Iterable[Any],
+    innledning: str | None = None)
+-> None:
+    if innledning:
+        print(innledning)
+    for element in a:
+        print(element)
+```
+
+## What's in it for me?
+
+### What's in it for me?
+
+- Merking av kode påvirker ikke Python 😵‍💫
+
+```python
+def skriv_ut(a: list[int]) -> None:
+    for element in a:
+        print(element)
+
+skriv_ut({"a": 1, "b": 2})
+```
+
+. . .
+
+- MEN, typer er veldig fin dokumentasjon
+  - Viser intensjon
+  - VSCode (og andre editorer) kan vise og hjelpe med hvilken type en metode ønsker
+
+## Sjekke kode med [`mypy`](https://mypy-lang.org/)
+
+::: footer
+[`mypy` type hint cheat sheet](https://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html#cheat-sheet-py3)
+:::
+
+### Sjekke kode med `mypy`
+
+```python
+import random
+
+a = "hei"
+b = 3
+
+if random.random() > 0.9:
+    a + b
+```
+
+Sjekk med `mypy`:
+
+```{.bash code-line-numbers="false"}
+mypy test.py
+```
+. . .
+
+```{.bash code-line-numbers="false"}
+test.py:7: error: Unsupported operand types for + ("str" and "int")  [operator]
+Found 1 error in 1 file (checked 1 source file)
+```
+
+### Sjekke kode med `mypy`
+
+- Bruk [cheat sheet](https://mypy.readthedocs.io/en/latest/cheat_sheet_py3.html) for å komme i gang
+- `mypy` kan kjøres på deler av koden
+  - [Kan gjøres gradvis strengere](https://mypy.readthedocs.io/en/latest/existing_code.html)
+- Sikt mot ✨ `mypy --strict` ✨
+
+# Oppsummert
+
+### Oppsummert
+
+- Python har et sterkere typesystem enn mange tror!
+
+. . .
+
+- Merk kode med typer
+  - Viser intensjon for deg og andre
+
+. . .
+
+- Bruk `mypy` for å sjekke koden
+  - Verifiser at man ikke gjør noe dumt
+
+# Spørsmål?
