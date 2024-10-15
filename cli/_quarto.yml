@@ -1,0 +1,50 @@
+project:
+  type: book
+
+book:
+  title: "Lag kommandolinje-verktøy i Python"
+  description: "Workshop om å lage kommandolinje-verktøy med typer i Python"
+  author:
+    - name: Jørgen Nordmoen
+      affiliation: NAV IT
+      email: jorgen.halvorsen.nordmoen@nav.no
+
+  publisher: "NAV - Arbeids- og velferdsetaten"
+  genre: "Workshop"
+
+  license: "CC BY"
+  language: "no"
+  date: "10.15.2024"
+  date-format: "DD.MM.YYYY"
+
+  page-navigation: true
+  repo-url: https://github.com/navikt
+  twitter-card: true
+  open-graph: true
+  downloads: [pdf, epub]
+
+  chapters:
+    - index.qmd
+
+  navbar:
+    logo: assets/nav_logo_hvit.png
+    logo-alt: "Logo til NAV - Arbeids- og velferdsetaten"
+    right:
+      - icon: slack
+        href: https://nav-it.slack.com/archives/C6WB7DXNC
+        aria-label: Still spørsmål i \#data-science
+
+format:
+  html:
+    date-modified: now
+    date-format: "DD.MM.YYYY"
+    lang: no
+    theme:
+      light: flatly
+      dark: darkly
+  epub:
+    toc: true
+  pdf:
+    toc: true
+    colorlinks: true
+    number-sections: true
