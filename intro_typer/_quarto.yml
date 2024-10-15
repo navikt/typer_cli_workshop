@@ -4,7 +4,7 @@ project:
 title: "Typing i Python ⌨️"
 subtitle: "Hvordan bruke og få nytte"
 
-repo-url: https://github.com/navikt/
+repo-url: https://github.com/navikt/typer_cli_workshop
 
 toc: true
 toc-title: "Innhold"

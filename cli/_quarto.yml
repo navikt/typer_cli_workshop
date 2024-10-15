@@ -14,11 +14,9 @@ book:
 
   license: "CC BY"
   language: "no"
-  date: "10.15.2024"
-  date-format: "DD.MM.YYYY"
 
   page-navigation: true
-  repo-url: https://github.com/navikt
+  repo-url: https://github.com/navikt/typer_cli_workshop
   twitter-card: true
   open-graph: true
   downloads: [pdf, epub]
