@@ -1,0 +1,26 @@
+project:
+  output-dir: output
+
+title: "Typing i Python ⌨️"
+subtitle: "Hvordan bruke og få nytte"
+
+repo-url: https://github.com/navikt/
+
+toc: true
+toc-title: "Innhold"
+toc-depth: 2
+language: ./assets/_quarto_language.yml
+mainfont: "Arial"
+
+execute: 
+  echo: true
+  enabled: true
+
+format:
+  revealjs:
+    slide-level: 3
+    highlight-style: pygments
+    preview-links: auto
+    logo: assets/nav-logo-red.svg
+    theme: [default, assets/nav.scss]
+    slide-number: true
