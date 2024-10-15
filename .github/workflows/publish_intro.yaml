@@ -21,7 +21,7 @@ jobs:
         uses: navikt/story-upload@v1
         with:
           id: b98304e4-2cd0-438b-b807-5518829b70e8
-          dir: into_typer/output
+          dir: intro_typer/output
           team_token: ${{ secrets.TEAM_TOKEN }}
           env: prod
           public: false
