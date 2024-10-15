@@ -1,0 +1,27 @@
+name: Publiser presentasjon om typesystemet i Python
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Install Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+      - name: Render project
+        uses: quarto-dev/quarto-actions/render@v2
+        with:
+          path: intro_typer
+      - name: Last opp til Datamarkedsplassen
+        uses: navikt/story-upload@v1
+        with:
+          id: b98304e4-2cd0-438b-b807-5518829b70e8
+          dir: into_typer/output
+          team_token: ${{ secrets.TEAM_TOKEN }}
+          env: prod
+          public: false
