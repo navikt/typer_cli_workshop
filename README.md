@@ -1,12 +1,12 @@
-# Bygg kommandolinje-verktøy med Typer
+# Typesystemet i Python med `typer`
 
-Dette prosjektet er en todelt introduksjon til typer i Python og bygge
+Dette prosjektet er en todelt introduksjon til typesystemet i Python og bygge
 kommandolinje-verktøy (CLI) med [`typer`](https://typer.tiangolo.com/) i Python.
 
 ## Introduksjon til typer i Python
 
 I mappen [`intro_typer`](./intro_typer/) finnes det en Quarto presentasjon med
-introduksjon til typer i Python.
+introduksjon til typesystemet til Python.
 
 ## Bygge kommandolinje-verktøy med `typer`
 
