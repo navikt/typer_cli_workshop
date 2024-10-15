@@ -1,0 +1,30 @@
+name: Publiser workshop veiledning
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Install Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          # Trenger Latex for PDF output
+          tinytex: true
+      - name: Render project
+        uses: quarto-dev/quarto-actions/render@v2
+        with:
+          path: cli
+      - name: Last opp til Datamarkedsplassen
+        uses: navikt/story-upload@v1
+        with:
+          id: c09048a0-3373-4cc6-af12-44d3beb6569b
+          dir: cli/_book
+          team_token: ${{ secrets.TEAM_TOKEN }}
+          env: prod
+          public: false
