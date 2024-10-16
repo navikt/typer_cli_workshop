@@ -1,0 +1,82 @@
+# Forberedelser
+
+Før vi kan komme i gang å utvikle er det et par steg vi må gjennom for å passe
+på at vi har tilgang til alt vi trenger.
+
+Vi kommer til å bruke [`uv`](https://docs.astral.sh/uv/) for å håndtere
+prosjektet, men vi skal passe på å alltid påpeke hvilke kommandoer vi kjører
+slik at du ikke trenger inngående kjennskap til `uv`.
+
+## Opprett prosjekt
+
+Det første vi skal gjøre er å lage et prosjekt med `uv`. Fordelen med dette er
+at `uv` kan installere avhengigheter for oss samtidig som den passer på at vi
+har et virtueltmiljø vi kan benytte oss av.
+
+```bash
+uv init --python=3.12 --app cli_workshop
+```
+
+::: {.column-margin}
+Vi ber spesifikt om Python versjon `3.12` for å forsikre oss om at du kjører
+samme versjon av Python som vi antar for denne workshopen.
+:::
+
+Kommandoen vil opprette en mappe, som heter `cli_workshop` (her kan man velge
+noe annet, men navn er vanskelig...), vi ber `uv` opprette denne mappen med et
+"applikasjons"-oppsett (`--app`) og vi har bedt om en spesifikk versjon av
+Python.
+
+::: {.callout-note collapse="true"}
+## Hva betyr "applikasjons"-oppsett?
+`uv` kan opprette to forskjellige typer prosjekter for oss:
+
+- Det ene oppsettet (biblioteksoppsett - `--lib`) er myntet for prosjekter som
+ønsker å kunne distribuere en pakke på [PyPI](https://pypi.org/). Dette er
+gjerne prosjekter som det gir mening at andre kan importere i sin kode.
+- Det andre oppsettet (applikasjonsoppsettet - `--app`) er ment for
+enkeltstående applikasjoner som det ikke gir så mye mening å dele som en Python
+pakke, men kanskje skal fungere som et selvstendig verktøy (dette oppsettet er
+også default med `uv init`).
+:::
+
+## Installere avhengigheter
+
+Siden vi har et par avhengigheter som vi vet allerede nå at vi trenger så laster
+vi like så godt inn disse. Når vi utvikler ellers ville man kanskje lagt til
+avhengigheter når behovet melder seg, men for å ikke ha for mye fokus på `uv` så
+gjør vi oss ferdig med dette nå slik at vi slipper å tenke så mye på det i
+resten av workshopen.
+
+::: {.column-margin}
+Hvis du er her fra fremtiden og ønsker å aktivere prosjektet ditt på nytt
+trenger du bare å kjøre `uv sync` for at `uv` skal sette opp alt slik det var
+sist du utviklet.
+:::
+
+For selve kommandolinje-verktøy funksjonaliteten trenger vi
+[`typer`](https://typer.tiangolo.com), mens for muligheten til å laste ned
+nettsider kommer vi til å benytte [`httpx`](https://www.python-httpx.org/). Vi
+kommer også til å benytte [`rich`](https://rich.readthedocs.io/en/stable/), men
+siden `typer` har dette som anbefalt, og installerer dette for oss, så kommer vi
+ikke til å be eksplisitt om `rich`.
+
+For å installere disse med `uv` må vi først navigere til mappen vi opprettet
+over.
+
+::: {.panel-tabset}
+## Linux/MacOS/Powershell
+```bash
+cd cli_workshop
+```
+## Windows
+```bash
+dir cli_workshop
+```
+:::
+
+Og deretter be `uv` installere ønskede avhengigheter:
+
+```bash
+uv add typer httpx
+```
