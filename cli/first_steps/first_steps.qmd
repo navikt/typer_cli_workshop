@@ -1,0 +1,179 @@
+# Første steg
+
+For å bli litt kjent med `typer` starter vi enkelt før vi starter å løse
+oppgaven vi har satt oss fore.
+
+## Lage et kommandolinje-verktøy
+
+La oss først starte med å gjøre om `hello.py` i prosjektet vårt til et
+kommandolinje-verktøy. Foreløpig så vil det ikke gjøre så mye, men dette vil
+gjøre oss mer kjent med `typer` og vise frem litt av fordelen med `typer`.
+
+Det første vi skal gjøre er å fjerne koden som allerede ligger i `hello.py` og
+erstatte den med vår egen.
+
+Erstatt innholdet i `hello.py` med følgende:
+
+```python
+import typer
+
+app = typer.Typer()
+
+
+@app.command()
+def main() -> None:
+    print("Hello world!")
+
+
+if __name__ == "__main__":
+    app()
+```
+
+::: {.column-margin}
+Legg merke til at alle kodeboksene har et lite ikon for utklippstavle øverst i
+høyre hjørne, når du tar musepekeren over boksen. Hvis du trenger å kopier alt
+som står i en boks 😉.
+:::
+
+La oss kjøre filen og se hva dette har gjort.
+
+```bash
+uv run hello.py
+```
+
+Mest sannsynlig fikk du ikke så mye annet enn `Hello world!` skrevet ut, men la
+oss se om `typer` kanskje har gjort noe?
+
+Prøv å kjør samme kommando som over, men legg til `--help`.
+
+```bash
+uv run hello.py --help
+```
+
+Forhåpentligvis så fikk du nå en hjelpende beskjed i flotte farger! Her har
+`typer` gjort alt for oss og gitt oss vårt første parameter til
+kommandolinje-verktøyet vårt, nemlig `--help`. Som vi vil se senere så vil
+`typer` ta hensyn til parametere vi ønsker samt dokumentasjon vi legger inn i
+verktøyet.
+
+## Vårt første argument
+
+Akkurat nå gjør jo ikke koden vår så mye ut av seg, så la oss legge til litt
+funksjonalitet. Istedenfor å bare skrive `Hello world!` så hadde det vært fint
+om vi kunne gi inn et navn å hilse på. Da passer det godt med et argument!
+
+I `typer` vil alle parametere til funksjonen vår gjøres om til kommandolinje
+argumenter så lenge vi er flinke til å beskrive hvilken type variabel vi ønsker.
+
+La oss endre `main` til å ta inn et streng argument som vi kan si hei til. Endre
+`main` slik at den tar in et parameter av typen `str`:
+
+```python
+@app.command()
+def main(name: str) -> None:
+    print(f"Hei {name}!")
+```
+
+Kjør koden med:
+
+```bash
+uv run hello.py
+```
+
+Ups! Det gikk ikke helt etter planen, eller gjorde det det? Vi fikk nå beskjed
+av `typer` at vi mangler et argument og det stemmer forsåvidt. Kanskje vi burde
+se hva programmet vårt nå forventer med `--help`.
+
+Sjekk med:
+
+```bash
+uv run hello.py --hjelp
+```
+
+Vi kan se at kommandolinje-verktøyet vårt nå har et argument og det kreves. Det
+var jo egentlig det vi ville, så da fungerte det jo strålende! 🥳
+
+La oss se hvordan programmet oppfører seg hvis vi gir inn et argument.
+
+```bash
+uv run hello.py NAV
+```
+
+Forhåpentligvis så har du nå fått en hyggelig beskjed med `Hei NAV`.
+
+## Kommandolinje argumenter mot valg
+
+Ofte når vi bruker kommandolinje-verktøy finnes det flere forskjellige måter å
+oppgi parametere på. Over så vi det vi kaller et kommandolinje argument, men en
+annen vanlig måte er med lenger valg `--size` (eller `--help` som vi også har
+vært innom). Den siste typen av parameter kommer vi til å kalle valg (eller
+`Option` som `typer` bruker). Forskjellen mellom disse typene parametere er ikke
+så stor og distinksjonen kan fort bli borte avhengig av preferanser, men vi holder
+med `typer` og sier at argumenter er kommandolinje-parametere som _må_ være
+tilstede, mens valg er kommandolinje-parametere som ikke nødvendigvis trengs å
+oppgis.
+
+## Vårt første valg
+
+La oss se hvordan dette kan fungere i praksis ved å legge til et
+høflighetsparameter i verktøyet vårt.
+
+La oss endre `main` igjen til å inneholde et boolsk parameter som vi kan bruke
+for å være høflige.
+
+Vi endrer main til å se slik ut:
+
+```python
+@app.command()
+def main(name: str, formal: bool = False) -> None:
+    if formal:
+        print(f"Hallo {name}")
+    else:
+        print(f"Hei {name}!")
+```
+
+Hvis vi nå kjører verktøyet vårt som før:
+
+```bash
+uv run hello.py NAV
+```
+
+Ser det ikke så anderledes ut, men hvis vi sjekker med `--help` så kan vi se at
+det nå finnes et (egentlig to!) nye kommandolinje-parametere, nemlig `--formal`.
+
+La oss prøve:
+
+```bash
+uv run hello.py NAV --formal
+```
+
+Det var litt mer noe vi kunne presentert for Hans Christian 😌
+
+## Dokumentere verktøyet vårt
+
+Vi har allerede sett at `typer` gir oss en del hjelp i form av automatisk
+håndtering av parametere og hjelpebeskjeder. Men vi kan også gi `typer` en
+hjelpende hånd for å hjelpe brukere av verktøyet vårt.
+
+La oss dokumentere verktøyet vårt. For å gjøre dette bruker vi vanlige Python
+[`docstring`](https://peps.python.org/pep-0257/) og dokumenterer som vi alltid
+gjør 🧐
+
+Endre `main` til å inneholde en forklarende setning om hva verktøyet gjør.
+
+```python
+@app.command()
+def main(name: str, formal: bool = False) -> None:
+    """Si hei til det gitte navnet"""
+    if formal:
+        print(f"Hallo {name}")
+    else:
+        print(f"Hei {name}!")
+```
+
+Hvis vi nå kjører verktøyet vårt med `--help` vil vi se at `typer` har brukt
+dokumentasjonen vår for å veilede bruker.
+
+I `typer` kan vi også [dokumentere individuelle
+argumenter](https://typer.tiangolo.com/tutorial/arguments/help/#add-a-help-text-for-a-cli-argument)
+og valg, og mer til (men det er utenfor hva vi rekker å dekke her)!
