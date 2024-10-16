@@ -9,3 +9,10 @@ det endelige målet. Vi anbefaler at du følger kapittel for kapittel slik at ma
 ser sammenhengen, da hvert kapittel antar at man har fullført de foregående.
 
 Bruk menyen på venstreside for å navigere gjennom kapitlene.
+
+## Oppgaven
+Vi tar sikte på å bygge opp et enkelt kommandolinje-verktøy som tar inn på
+kommandolinjen nettsider og laster ned sidene. For å gjøre oppgaven visuell
+ønsker vi å vise en fremgangsindikator per nettside og totalt. Hvis bruker ber
+om det, på kommandolinjen, vis en oppsummering av hva som er gjort.
+
