@@ -168,3 +168,131 @@ def main(webpages: list[str]) -> None:
 ## Laste ned nettsider
 
 La oss nå legge til funksjonaliteten for å laste ned nettsiden som vi får inn.
+
+Vi bruker `httpx.get` for å laste ned og skriver deretter innholdet til en fil
+med samme navn som nettsiden.
+
+```python
+@app.command()
+def main(webpages: list[str]) -> None:
+    with Progress(console=console) as progress:
+        task = progress.add_task("Nettsider lastet ned", total=len(webpages))
+        for webpage in webpages:
+            page_response = httpx.get("https://" + webpage) # <1>
+            if page_response.status_code != 200: # <2>
+                console.print(f"[red] Klarte ikke å laste ned [bold]{webpage}[/bold]!")
+            else:
+                size: int | None = page_response.headers.get("Content-Length", len(page_response.content)) # <3>
+                page_task = progress.add_task(f"Laster ned [italic magenta]{webpage}[/]", total=size)
+                with open(webpage, mode="wb") as fil: # <4>
+                    for chunk in page_response.iter_bytes(512): # <4>
+                        wrote = fil.write(chunk) # <4>
+                        progress.advance(page_task, advance=wrote) # <4>
+                        time.sleep(0.01) # <5>
+                progress.remove_task(page_task)
+            progress.advance(task, advance=1)
+```
+1. Vi kjører en `GET` mot nettsiden, merk at vi her hardkoder `https://` for å
+gjøre det enkelt for oss selv.
+2. Sjekk at bruker faktisk ga oss en nettside vi kunne nå.
+3. Prøv å hente størrelse på nettsiden for fremdriftsindikator.
+4. Åpne fil og skriv bolker med data.
+5. Litt mer juks for å faktisk se indikator 🥸 (prøv å ta bort for å se hva som skjer).
+
+### Last ned til en gitt mappe
+
+Jeg vet ikke med dere, men jeg synes det er kjipt når et verktøy laster ned
+masse data og skitner til en mappe. For å utbedre dette så burde vi gi bruker et
+valg om å oppgi en mappe som vi kan skrive til.
+
+::: {.callout-tip}
+## Oppgave
+Legg til et kommandolinje-valg som er av typen `pathlib.Path` som er valgfritt.
+:::
+
+::: {.callout-note collapse="true"}
+## Løsning
+```python
+import pathlib # <1>
+import time
+
+import httpx
+import typer
+from rich.console import Console
+from rich.progress import Progress
+
+app = typer.Typer()
+console = Console()
+
+
+@app.command()
+def main(webpages: list[str], folder: pathlib.Path | None = None) -> None: # <2>
+    with Progress(console=console) as progress:
+        task = progress.add_task("Nettsider lastet ned", total=len(webpages))
+        for webpage in webpages:
+            page_response = httpx.get("https://" + webpage)
+            if page_response.status_code != 200:
+                console.print(f"[red] Klarte ikke å laste ned [bold]{webpage}[/bold]!")
+            else:
+                size: int | None = page_response.headers.get("Content-Length", len(page_response.content))
+                page_task = progress.add_task(f"Laster ned [italic magenta]{webpage}[/]", total=size)
+                with open(webpage, mode="wb") as fil:
+                    for chunk in page_response.iter_bytes(512):
+                        wrote = fil.write(chunk)
+                        progress.advance(page_task, advance=wrote)
+                        time.sleep(0.01)
+                progress.remove_task(page_task)
+            progress.advance(task, advance=1)
+
+
+if __name__ == "__main__":
+    app()
+```
+1. Husk `import`.
+2. Kommandolinje-valg. Når vi bruker `|` representerer det enten den ene typen
+eller den andre og med `| None` blir det enten det første eller ingenting.
+:::
+
+Vi må huske å sjekke at bruker faktisk har oppgitt en mappe. Dette er en nydelig
+mulighet til å bruke
+[`raise typer.Abort()`](https://typer.tiangolo.com/tutorial/terminating/#abort).
+
+::: {.column-margin}
+`typer.Abort` er en god måte å avslutte kjøring og indikere at noe gikk galt.
+`typer.Abort` tar seg av å avslutte ordentlig, den skriver ut en liten "Aborted"
+for oss og gir riktig signal til terminalen eller programmet som kjørte
+kommandolinje-verktøyet vårt.
+:::
+
+::: {.callout-tip}
+## Oppgave
+Før verktøyet vårt gjøre noe som helst, sjekk om vi har fått en mappe å laste
+ned til og pass på (med
+[`pathlib.Path.is_dir`](https://docs.python.org/3/library/pathlib.html#pathlib.Path.is_dir))
+at det faktisk er en mappe. Bare fortsett kjøring hvis det faktisk er en mappe.
+:::
+
+::: {.callout-note collapse="true"}
+## Løsning
+```python
+@app.command()
+def main(webpages: list[str], folder: pathlib.Path | None = None) -> None:
+    if folder: # <1>
+        if folder.exists() and not folder.is_dir(): # <2>
+            console.print(f"[bold red]Kan ikke laste ned til [i]{folder}[/i], det er ikke en mappe!")
+            raise typer.Abort()
+        elif not folder.exists(): # <3>
+            folder.mkdir()
+    # Resten er som før
+```
+1. Sjekk om vi får in valget fra bruker.
+2. Hvis stien eksisterer og det ikke er en mappe, fortell bruker at de tar feil.
+3. Hvis stien ikke eksisterer lager vi den for bruker.
+:::
+
+Tilslutt må vi bare bruke mappen hvis den er oppgitt.
+
+```python
+file_path = webpage if not folder else folder / webpage
+with open(file_path, mode="wb") as fil:
+```
