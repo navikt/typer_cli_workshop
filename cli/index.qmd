@@ -8,7 +8,8 @@ Hvert kapittel i denne veiledningen er tiltenkt som et separat steg på veien mo
 det endelige målet. Vi anbefaler at du følger kapittel for kapittel slik at man
 ser sammenhengen, da hvert kapittel antar at man har fullført de foregående.
 
-Bruk menyen på venstreside for å navigere gjennom kapitlene.
+Bruk menyen på venstreside, eller menyen nederst på hver side, for å navigere
+gjennom kapitlene.
 
 ## Oppgaven
 Vi tar sikte på å bygge opp et enkelt kommandolinje-verktøy som tar inn på
