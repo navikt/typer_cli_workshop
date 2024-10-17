@@ -1,0 +1,168 @@
+# Laste ned nettsider
+
+For å minne oss selv på hva oppgaven var gjengir vi den her:
+
+::: {.column-margin}
+Vi er nå ferdig med oppvarmingen og kan legge fra oss `hello.py` 😢
+:::
+
+> Vi tar sikte på å bygge opp et enkelt kommandolinje-verktøy som tar inn på
+> kommandolinjen nettsider og laster ned sidene.
+
+## Den spede begynnelse
+
+Vi starter med en mal for kommandolinje-verktøy og legger følgende i `main.py` i
+`cli_workshop` prosjektet vårt.
+
+```python
+import typer
+from rich.console import Console
+
+app = typer.Typer()
+console = Console()
+
+
+@app.command()
+def main() -> None:
+    pass
+
+
+if __name__ == "__main__":
+    app()
+```
+
+## Ta inn et argument
+
+Før vi begynner å laste ned nettsider så kan det være greit å vite hvilke
+nettsider vi skal laste ned.
+
+::: {.callout-tip}
+## Oppgave
+I `main.py` ta inn et argument som er en nettside som brukeren ønsker å laste
+ned. Vi starter enkelt og tar inn bare én nettside og tar den inn som `str`.
+
+Skriv deretter ut nettsiden med `console`.
+:::
+
+::: {.callout-note collapse="true"}
+## Løsning
+```python
+@app.command()
+def main(webpage: str) -> None:
+    console.print(f"{webpage}")
+```
+:::
+
+## Ta inn en liste med nettsider
+
+Vi skal utvide litt og nå ta inn en liste med nettsider.
+
+::: {.callout-tip}
+## Oppgave
+I `main.py` ta inn et argument som er en liste med nettsider som brukeren ønsker
+å laste ned.
+
+Skriv deretter ut nettsidene med `console`.
+:::
+
+::: {.callout-caution collapse="true"}
+## Tips
+Vi definerer en liste type i Python sitt typesystem med:
+
+```python
+min_liste: list[int] = [1, 2, 3]
+```
+:::
+
+::: {.callout-note collapse="true"}
+## Løsning
+```python
+@app.command()
+def main(webpages: list[str]) -> None:
+    for webpage in webpages:
+        console.print(f"{webpage}")
+```
+:::
+
+## Fremgangsindikator
+
+Nå som vi klarer å ta inn en liste med argumenter er det på tide å gjøre
+verktøyet litt mer visuelt. La oss legge til en [fremdriftsindikator med
+`rich`](https://rich.readthedocs.io/en/stable/progress.html) og jukse litt for å
+faktisk kunne se den.
+
+Vi legger først til en fremdriftsindikator for alle nettsidene og deretter
+venter litt mellom hver gang vi skriver ut slik at vi kan se hva som skjer.
+
+```python
+import time
+
+import typer
+from rich.console import Console
+from rich.progress import Progress
+
+app = typer.Typer()
+console = Console()
+
+
+@app.command()
+def main(webpages: list[str]) -> None:
+    with Progress(console=console) as progress: # <1>
+        task = progress.add_task("Nettsider lastet ned", total=len(webpages)) # <2>
+        for webpage in webpages:
+            time.sleep(3) # <3>
+            console.print(f"Lastet ned: {webpage}")
+            progress.advance(task, advance=1) # <4>
+
+
+if __name__ == "__main__":
+    app()
+```
+1. Vi oppretter en fremdriftsindikator instans.
+2. Vi lager en oppgave å vise fremdrift for.
+3. Juks for å se fremdrift 🥸
+4. Vi oppdaterer oppgaven for å vise fremdrift.
+
+---
+
+::: {.callout-note}
+## Oppgave
+Legg til en ny oppgave per nettside og lat som at hver nettside tar 20 runder
+med `time.sleep(0.1)` for å ferdigstille.
+
+```python
+for webpage in webpages:
+    for _ in range(20):
+        time.sleep(0.1)
+        # Oppdater fremdrift her
+    console.print(f"Lastet ned: {webpage}")
+    progress.advance(task, advance=1)
+```
+:::
+
+::: {.callout-caution}
+## Tips
+Prøv å bruk `progress.remove_task` slik at nedlasting per nettside bare vises
+midlertidig.
+:::
+
+::: {.callout-note collapse="true"}
+## Løsning
+```python
+@app.command()
+def main(webpages: list[str]) -> None:
+    with Progress(console=console) as progress:
+        task = progress.add_task("Nettsider lastet ned", total=len(webpages))
+        for webpage in webpages:
+            page_task = progress.add_task(f"Laster ned [italic magenta]{webpage}[/]", total=20)
+            for _ in range(20):
+                time.sleep(0.1)
+                progress.advance(page_task, advance=1)
+            progress.remove_task(page_task)
+            progress.advance(task, advance=1)
+```
+:::
+
+## Laste ned nettsider
+
+La oss nå legge til funksjonaliteten for å laste ned nettsiden som vi får inn.
