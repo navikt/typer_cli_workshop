@@ -25,6 +25,7 @@ book:
     - index.qmd
     - setup.qmd
     - first_steps/first_steps.qmd
+    - colors/colors.qmd
 
   navbar:
     logo: assets/nav_logo_hvit.png

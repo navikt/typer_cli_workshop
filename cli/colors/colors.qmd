@@ -1,0 +1,244 @@
+# Fargelegging
+
+Vi skal ta en liten avstikker til før vi begynner på selve oppgaven. Vi skal i
+dette kapittelet se litt på hvordan vi kan bruke `rich` for å gjøre
+kommandolinje-verktøyet vårt litt enklere for øynene.
+
+::: {.column-margin}
+> Kom arbeidslyst og treng deg på -her skal du motstand finne!
+>
+> - Solan Gundersen
+:::
+
+Vi skal ikke bruke alt for lang tid på `rich`, da det sikkert er mer interessant
+å finne ut av selv, men vi skal vise litt av fordelen med `rich` over vanlig
+`print`.
+
+## Bruke `rich.print`
+
+Den enkleste måten å bruke `rich` på er å importere `print` fra `rich` og bruke
+denne metoden istedenfor den vanlige `print`.
+
+Vi begynner med programmet vi endte opp med etter forrige kapittel:
+
+```python
+import typer
+
+app = typer.Typer()
+
+
+@app.command()
+def main(name: str, formal: bool = False) -> None:
+    """Si hei til det gitte navnet"""
+    if formal:
+        print(f"Hallo {name}")
+    else:
+        print(f"Hei {name}!")
+
+
+if __name__ == "__main__":
+    app()
+```
+
+La oss først importere `rich` og se om det ble anderledes.
+
+Øverst i verktøyet kan vi endre avhengigheter slik at det blir som følger:
+
+```python
+import typer
+from rich import print
+
+app = typer.Typer()
+```
+
+Dette gjør at linjene våre med `print` endres fra Python sin vanlige metode til
+`rich` sin utskrift. Vi kan deretter kjøre verktøyet som vanlig.
+
+```bash
+uv run hello.py NAV
+```
+
+Det gjorde ikke så stor forskjell, men la oss raskt se hva vi kan få til med
+`rich`.
+
+### Skrive ut emoji 😲
+
+La oss legge til en emoji 🎩. I `rich` kan vi bruke [omtrent samme
+syntaks som i Slack](https://rich.readthedocs.io/en/stable/markup.html#emoji).
+Siden en 🎩 er litt formel så legger vi den til i formell utskrift.
+
+Vi endrer utskriften til følgende:
+
+```python
+@app.command()
+def main(name: str, formal: bool = False) -> None:
+    """Si hei til det gitte navnet"""
+    if formal:
+        print(f"Hallo {name} :top_hat:")
+    else:
+        print(f"Hei {name}!")
+```
+
+Husk å kjøre med `--formal`.
+
+### Skrive ut i farger
+
+Nå ble jo `--formal` utskriften veldig fin, men la oss også gjøre noe for mannen
+i gata. Vi legger til litt farger og uthevning!
+
+::: {.column-margin}
+Det er jo vanlige folks tur...
+
+(Skrevet i 2024)
+:::
+
+[`rich` har støtte for mye
+forskjellig](https://rich.readthedocs.io/en/stable/markup.html#syntax) så her er
+det bare å slå seg løs.
+
+Vi endrer igjen funksjonen vår:
+
+```python
+@app.command()
+def main(name: str, formal: bool = False) -> None:
+    """Si hei til det gitte navnet"""
+    if formal:
+        print(f"Hallo {name} :top_hat:")
+    else:
+        print(f"Hei [bold magenta]{name}[/]!")
+```
+
+Det ble superflott!
+
+## Bruke `rich.console.Console`
+
+Selv om det er veldig praktisk å bare importere `from rich import print` så er
+det ofte bedre å opprette en `Console` som `rich` kan bruke. Dette gir litt
+flere kapabiliteter, som å skrive ut tabeller samt å vise en
+fremdriftsindikator.
+
+La oss skrive om verktøyet vårt til å bruke `rich.console.Console` og deretter
+leke oss litt med en tabell.
+
+For å bruke `Console` er det ofte greit å bare lage en global variabel som vi
+kan benytte oss til å skrive ut med. Vi fortsetter på programmet over.
+
+```python
+import typer
+from rich import print
+from rich.console import Console # <1>
+
+app = typer.Typer()
+console = Console() # <2>
+
+
+@app.command()
+def main(name: str, formal: bool = False) -> None:
+    """Si hei til det gitte navnet"""
+    if formal:
+        print(f"Hallo {name} :top_hat:")
+    else:
+        print(f"Hei [bold magenta]{name}[/]!")
+
+
+if __name__ == "__main__":
+    app()
+```
+1. Vi importerer fra `rich.console`
+2. Opprett en global instans
+
+Merk at foreløpig har vi ikke begynt å bruke `console` instansen vår. Det gjør
+vi ved å bytte ut `print` med `console.print`.
+
+```python
+@app.command()
+def main(name: str, formal: bool = False) -> None:
+    """Si hei til det gitte navnet"""
+    if formal:
+        console.print(f"Hallo {name} :top_hat:")
+    else:
+        console.print(f"Hei [bold magenta]{name}[/]!")
+```
+
+::: {.column-margin}
+Vi kan nå også fjerne linjen med
+
+```python
+from rich import print
+```
+:::
+
+Verktøyet vårt burde ikke ha endret oppførsel, men vi har nå mulighet til å
+gjøre enda mer med `rich`.
+
+### Skrive ut en tabell
+
+La oss bruke den nye kraften til å skrive ut avansert formatering, [en
+tabell](https://rich.readthedocs.io/en/stable/tables.html)!
+
+::: {.callout-tip}
+## Oppgave
+For at ikke tabellen skal skrives ut hver gang vi kaller på verktøyet vårt. Legg
+til et nytt valg som bestemmer om tabellen skal skrives ut eller ikke.
+:::
+
+::: {.callout-note collapse="true"}
+## Løsning
+```python
+@app.command()
+def main(name: str, formal: bool = False, summary: bool = False) -> None: # <1>
+    """Si hei til det gitte navnet"""
+    if formal:
+        console.print(f"Hallo {name} :top_hat:")
+    else:
+        console.print(f"Hei [bold magenta]{name}[/]!")
+    if summary: # <2>
+        pass
+```
+1. Legg til et nytt valgfritt `bool` parameter på metoden vår (`summary: bool = False`).
+2. Skriv ut tabellen bare når `summary` er sann.
+:::
+
+For å ikke bruke for mye tid på å lage en tabell låner vi en allerede eksisterende.
+
+```python
+import typer
+from rich.console import Console
+from rich.table import Table
+
+app = typer.Typer()
+console = Console()
+
+
+def create_table() -> Table:
+    """Hjelpemetode for å generere en tabell i `rich`"""
+    table = Table(title="Star Wars Movies")
+
+    table.add_column("Released", justify="right", style="cyan", no_wrap=True)
+    table.add_column("Title", style="magenta")
+    table.add_column("Box Office", justify="right", style="green")
+
+    table.add_row("Dec 20, 2019", "Star Wars: The Rise of Skywalker", "$952,110,690")
+    table.add_row("May 25, 2018", "Solo: A Star Wars Story", "$393,151,347")
+    table.add_row("Dec 15, 2017", "Star Wars Ep. V111: The Last Jedi", "$1,332,539,889")
+    table.add_row("Dec 16, 2016", "Rogue One: A Star Wars Story", "$1,332,439,889")
+
+    return table
+
+
+@app.command()
+def main(name: str, formal: bool = False) -> None:
+    """Si hei til det gitte navnet"""
+    if formal:
+        console.print(f"Hallo {name} :top_hat:")
+    else:
+        console.print(f"Hei [bold magenta]{name}[/]!")
+    console.print(create_table())
+
+
+if __name__ == "__main__":
+    app()
+```
+
+Som man forhåpentligvis ser så gir `rich` veldig gode muligheter for å gjøre
+programmene, og kommandolinje-verktøy, mye mer interaktive og enkle å forstå.
