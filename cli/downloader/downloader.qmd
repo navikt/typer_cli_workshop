@@ -182,7 +182,7 @@ def main(webpages: list[str]) -> None:
             if page_response.status_code != 200: # <2>
                 console.print(f"[red] Klarte ikke å laste ned [bold]{webpage}[/bold]!")
             else:
-                size: int | None = page_response.headers.get("Content-Length", len(page_response.content)) # <3>
+                size: int = page_response.headers.get("Content-Length", len(page_response.content)) # <3>
                 page_task = progress.add_task(f"Laster ned [italic magenta]{webpage}[/]", total=size)
                 with open(webpage, mode="wb") as fil: # <4>
                     for chunk in page_response.iter_bytes(512): # <4>
@@ -234,7 +234,7 @@ def main(webpages: list[str], folder: pathlib.Path | None = None) -> None: # <2>
             if page_response.status_code != 200:
                 console.print(f"[red] Klarte ikke å laste ned [bold]{webpage}[/bold]!")
             else:
-                size: int | None = page_response.headers.get("Content-Length", len(page_response.content))
+                size: int = page_response.headers.get("Content-Length", len(page_response.content))
                 page_task = progress.add_task(f"Laster ned [italic magenta]{webpage}[/]", total=size)
                 with open(webpage, mode="wb") as fil:
                     for chunk in page_response.iter_bytes(512):
