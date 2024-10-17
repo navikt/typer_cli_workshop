@@ -34,7 +34,8 @@ if __name__ == "__main__":
 ## Ta inn et argument
 
 Før vi begynner å laste ned nettsider så kan det være greit å vite hvilke
-nettsider vi skal laste ned.
+nettsider vi skal laste ned. La oss starte med å ta inn én nettside og utvide
+derfra.
 
 ::: {.callout-tip}
 ## Oppgave
@@ -55,7 +56,8 @@ def main(webpage: str) -> None:
 
 ## Ta inn en liste med nettsider
 
-Vi skal utvide litt og nå ta inn en liste med nettsider.
+Det holder jo egentlig ikke med bare en nettside, vi må ta inn flere! La oss
+prøve å åpne for at bruker kan gi inn flere nettsider på kommandolinjen.
 
 ::: {.callout-tip}
 ## Oppgave
