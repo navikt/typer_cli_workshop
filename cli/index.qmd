@@ -12,7 +12,15 @@ Bruk menyen på venstreside for å navigere gjennom kapitlene.
 
 ## Oppgaven
 Vi tar sikte på å bygge opp et enkelt kommandolinje-verktøy som tar inn på
-kommandolinjen nettsider og laster ned sidene. For å gjøre oppgaven visuell
-ønsker vi å vise en fremgangsindikator per nettside og totalt. Hvis bruker ber
-om det, på kommandolinjen, vis en oppsummering av hva som er gjort.
+kommandolinjen nettsider og laster ned sidene. 
+
+::: {.column-margin}
+Vi forutsetter ingen kunnskap om hvordan man laster ned nettsider 🙌
+:::
+
+- For å gjøre oppgaven visuell ønsker vi å vise en fremdriftsindikator
+  - Per nettside
+  - Total fremdrift 
+- Hvis bruker ber om det, på kommandolinjen, vis en oppsummering av hva som er
+gjort.
 
