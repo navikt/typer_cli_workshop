@@ -120,7 +120,9 @@ La oss se hvordan dette kan fungere i praksis ved å legge til et
 høflighetsparameter i verktøyet vårt.
 
 La oss endre `main` igjen til å inneholde et boolsk parameter som vi kan bruke
-for å være høflige.
+for å være høflige. Vi krever ikke at bruker skal oppgi dette parametere, bruker
+kan selv bestemme om det skal være en høflig beskjed eller ikke, så da passer
+det godt med et kommandolinje-valg.
 
 Vi endrer main til å se slik ut:
 
@@ -140,7 +142,7 @@ uv run hello.py NAV
 ```
 
 Ser det ikke så anderledes ut, men hvis vi sjekker med `--help` så kan vi se at
-det nå finnes et (egentlig to!) nye kommandolinje-parametere, nemlig `--formal`.
+det nå finnes et (egentlig to!) nytt kommandolinje-parametere, nemlig `--formal`.
 
 La oss prøve:
 
