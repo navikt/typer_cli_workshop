@@ -127,7 +127,7 @@ if __name__ == "__main__":
 
 ---
 
-::: {.callout-note}
+::: {.callout-tip}
 ## Oppgave
 Legg til en ny oppgave per nettside og lat som at hver nettside tar 20 runder
 med `time.sleep(0.1)` for å ferdigstille.
