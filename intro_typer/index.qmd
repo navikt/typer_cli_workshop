@@ -14,7 +14,7 @@
 
 ### Hva er typer?
 
-Vi skiller gjerne på sterkttypet og svakttypet programmeringsspråk
+Vi skiller gjerne på svakttypet og sterkttypet programmeringsspråk
 
 . . .
 
