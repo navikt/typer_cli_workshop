@@ -11,6 +11,20 @@ ser sammenhengen, da hvert kapittel antar at man har fullført de foregående.
 Bruk menyen på venstreside, eller menyen nederst på hver side, for å navigere
 gjennom kapitlene.
 
+For å oppfordre til deltakelse vil workshopen inneholder oppgaver som man
+kan prøve seg på selv, med tilhørende løsningsforslag. Det vil se omtrent slik
+ut i teksten:
+
+::: {.callout-tip}
+## Oppgave
+Smil til noen du er glad i!
+:::
+
+::: {.callout-note collapse="true"}
+## Løsningsforslag
+🤩
+:::
+
 ## Oppgaven
 Vi tar sikte på å bygge opp et enkelt kommandolinje-verktøy som tar inn på
 kommandolinjen nettsider og laster ned sidene. 
