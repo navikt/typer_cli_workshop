@@ -183,7 +183,7 @@ til et nytt valg som bestemmer om tabellen skal skrives ut eller ikke.
 :::
 
 ::: {.callout-note collapse="true"}
-## Løsning
+## Løsningsforslag
 ```python
 @app.command()
 def main(name: str, formal: bool = False, summary: bool = False) -> None: # <1>
