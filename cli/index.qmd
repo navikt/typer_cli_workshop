@@ -25,3 +25,5 @@ Vi forutsetter ingen kunnskap om hvordan man laster ned nettsider 🙌
 - Hvis bruker ber om det, på kommandolinjen, vis en oppsummering av hva som er
 gjort.
 
+![Illustrasjon av kommandolinje-verktøyet som laster ned VG, Aftenposten og NAV
+sine forsider.](./assets/cli_workshop.gif)
