@@ -68,7 +68,7 @@ Skriv deretter ut nettsidene med `console`.
 :::
 
 ::: {.callout-caution collapse="true"}
-## Tips
+## Tips for definere liste i typesystemet
 Vi definerer en liste type i Python sitt typesystem med:
 
 ```python
