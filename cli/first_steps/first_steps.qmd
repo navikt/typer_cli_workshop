@@ -148,7 +148,13 @@ uv run hello.py NAV
 ```
 
 Ser det ikke så anderledes ut, men hvis vi sjekker med `--help` så kan vi se at
-det nå finnes et (egentlig to!) nytt kommandolinje-parametere, nemlig `--formal`.
+det nå finnes et nytt kommandolinje-parametere, nemlig `--formal`.
+
+::: {.column-margin}
+Egentlig har `typer` laget to valg for oss. Siden `formal` er boolsk velger
+`typer` å lage to flag, `--formal` og `--no-formal`. I motsetning til å ha
+`--formal=false/true`.
+:::
 
 La oss prøve:
 
