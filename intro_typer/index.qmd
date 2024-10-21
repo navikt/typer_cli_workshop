@@ -43,6 +43,16 @@ Feil: `no implementation for 'i32 + f32'`
 
 ### Hva er typer?
 
+Vi skal straks se på noen flere eksempler, men det er viktig å påpeke at hvor
+sterkt eller hvor svakt et typesystem er, er et spektrum.
+
+. . .
+
+Og mer enn det så er det et spektrum av avveininger. Hva som virker fornuftig
+for et system er kanskje ikke så fornuftig for et annet system.
+
+### Hva er typer?
+
 :::: {.columns}
 
 ::: {.column width="60%"}
