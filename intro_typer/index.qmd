@@ -257,6 +257,17 @@ Found 1 error in 1 file (checked 1 source file)
   - [Kan gjøres gradvis strengere](https://mypy.readthedocs.io/en/latest/existing_code.html)
 - Sikt mot ✨ `mypy --strict` ✨
 
+### Tips til kjøring av `mypy`
+
+- Bruk [`pre-commit`](https://github.com/pre-commit/mirrors-mypy)
+  - Sjekker kode før hver commit
+- Set opp `mypy` i CI (Github Actions)
+
+. . .
+
+- Kombiner med andre verktøy for mer automatisering
+  - [`ruff`](https://docs.astral.sh/ruff/)
+
 # Oppsummert
 
 ### Oppsummert
