@@ -20,6 +20,7 @@ book:
   twitter-card: true
   open-graph: true
   downloads: [epub]
+  site-url: "https://data.ansatt.nav.no/story/c09048a0-3373-4cc6-af12-44d3beb6569b/"
 
   chapters:
     - index.qmd
