@@ -8,6 +8,9 @@ book:
     - name: Jørgen Nordmoen
       affiliation: NAV IT
       email: jorgen.halvorsen.nordmoen@nav.no
+    - name: Sara Elise Wøllo
+      affiliation: NAV IT
+      email: Sara.Elise.Wollo@nav.no
 
   publisher: "NAV - Arbeids- og velferdsetaten"
   genre: "Workshop"
