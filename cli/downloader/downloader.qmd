@@ -54,6 +54,12 @@ def main(webpage: str) -> None:
 ```
 :::
 
+For å teste kjør med:
+
+```bash
+uv run main.py www.vg.no
+```
+
 ## Ta inn en liste med nettsider
 
 Det holder jo egentlig ikke med bare en nettside, vi må ta inn flere! La oss
@@ -85,6 +91,12 @@ def main(webpages: list[str]) -> None:
         console.print(f"{webpage}")
 ```
 :::
+
+For å teste kjør med:
+
+```bash
+uv run main.py www.vg.no www.aftenposten.no www.nav.no
+```
 
 ## Fremgangsindikator
 
@@ -199,6 +211,12 @@ gjøre det enkelt for oss selv.
 4. Åpne fil og skriv bolker med data.
 5. Litt mer juks for å faktisk se indikator 🥸 (prøv å ta bort for å se hva som skjer).
 
+For å teste kjør med:
+
+```bash
+uv run main.py www.vg.no www.aftenposten.no www.nav.no
+```
+
 ### Last ned til en gitt mappe
 
 Jeg vet ikke med dere, men jeg synes det er kjipt når et verktøy laster ned
@@ -295,6 +313,12 @@ Tilslutt må vi bare bruke mappen hvis den er oppgitt.
 ```python
 file_path = webpage if not folder else folder / webpage
 with open(file_path, mode="wb") as fil:
+```
+
+For å teste kjør med:
+
+```bash
+uv run main.py --folder nedlasting www.vg.no www.aftenposten.no www.nav.no
 ```
 
 ## Skrive ut oppsummering
@@ -429,4 +453,14 @@ def main(
 if __name__ == "__main__":
     app()
 ```
+:::
+
+For å teste kjør med:
+
+```bash
+uv run main.py www.vg.no www.aftenposten.no www.nav.no --show-summary
+```
+
+::: {.column-margin}
+Husk å bytte ut `--show-summary` med navnet på valget du lagde 🫵
 :::
