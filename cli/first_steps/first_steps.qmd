@@ -29,13 +29,6 @@ if __name__ == "__main__":
     app()
 ```
 
-::: {.column-margin}
-Legg merke til at alle kodeboksene har et lite ikon for utklippstavle øverst i
-høyre hjørne, når du tar musepekeren over boksen.
-<br/><br/>
-Skulle du trenger å kopier alt som står i en boks 😉.
-:::
-
 La oss kjøre filen og se hva dette har gjort.
 
 ```bash

@@ -25,6 +25,18 @@ Smil til noen du er glad i!
 🤩
 :::
 
+For kode vil vi utheve med følgende bokser:
+```bash
+python3 -c "print('Hello world!')"
+```
+
+::: {.column-margin}
+Legg merke til at alle kodeboksene har et lite ikon for utklippstavle øverst i
+høyre hjørne, når du tar musepekeren over boksen.
+
+Skulle du trenger å kopier alt som står i en boks 😉.
+:::
+
 ## Oppgaven
 Vi tar sikte på å bygge opp et enkelt kommandolinje-verktøy som tar inn på
 kommandolinjen nettsider og laster ned sidene. 
