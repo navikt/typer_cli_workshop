@@ -11,6 +11,25 @@ ser sammenhengen, da hvert kapittel antar at man har fullført de foregående.
 Bruk menyen på venstreside, eller menyen nederst på hver side, for å navigere
 gjennom kapitlene.
 
+## Oppgaven
+Vi tar sikte på å bygge opp et enkelt kommandolinje-verktøy som tar inn på
+kommandolinjen nettsider og laster ned sidene. 
+
+::: {.column-margin}
+Vi forutsetter ingen kunnskap om hvordan man laster ned nettsider 🙌
+:::
+
+- For å gjøre oppgaven visuell ønsker vi å vise en fremdriftsindikator
+  - Per nettside
+  - Total fremdrift 
+- Hvis bruker ber om det, på kommandolinjen, vis en oppsummering av hva som er
+gjort.
+
+![Animasjon av kommandolinje-verktøyet som laster ned VG, Aftenposten og NAV
+sine forsider.](./assets/cli_workshop.gif)
+
+## Elementer å legge merke til
+
 For å oppfordre til deltakelse vil workshopen inneholder oppgaver som man
 kan prøve seg på selv, med tilhørende løsningsforslag. Det vil se omtrent slik
 ut i teksten:
@@ -37,19 +56,3 @@ høyre hjørne, når du tar musepekeren over boksen.
 Skulle du trenger å kopier alt som står i en boks 😉.
 :::
 
-## Oppgaven
-Vi tar sikte på å bygge opp et enkelt kommandolinje-verktøy som tar inn på
-kommandolinjen nettsider og laster ned sidene. 
-
-::: {.column-margin}
-Vi forutsetter ingen kunnskap om hvordan man laster ned nettsider 🙌
-:::
-
-- For å gjøre oppgaven visuell ønsker vi å vise en fremdriftsindikator
-  - Per nettside
-  - Total fremdrift 
-- Hvis bruker ber om det, på kommandolinjen, vis en oppsummering av hva som er
-gjort.
-
-![Animasjon av kommandolinje-verktøyet som laster ned VG, Aftenposten og NAV
-sine forsider.](./assets/cli_workshop.gif)
