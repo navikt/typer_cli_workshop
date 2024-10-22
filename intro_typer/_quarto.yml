@@ -21,6 +21,6 @@ format:
     slide-level: 3
     highlight-style: pygments
     preview-links: auto
-    logo: assets/nav-logo-red.svg
+    logo: ./assets/nav-logo-red.svg
     theme: [default, assets/nav.scss]
     slide-number: true
