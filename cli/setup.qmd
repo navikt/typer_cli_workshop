@@ -13,19 +13,19 @@ Det første vi skal gjøre er å lage et prosjekt med `uv`. Fordelen med dette e
 at `uv` kan installere avhengigheter for oss samtidig som den passer på at vi
 har et virtueltmiljø vi kan benytte oss av.
 
+::: {.column-margin}
+Merk at `uv` håndterer alt rundt virtueltmiljø for oss automagisk 🧙
+:::
+
 ```bash
 uv init --python=3.12 --app cli_workshop
 ```
 
-::: {.column-margin}
-Vi ber spesifikt om Python versjon `3.12` for å forsikre oss om at du kjører
-samme versjon av Python som vi antar for denne workshopen.
-:::
-
 Kommandoen vil opprette en mappe, som heter `cli_workshop` (her kan man velge
 noe annet, men navn er vanskelig...), vi ber `uv` opprette denne mappen med et
 "applikasjons"-oppsett (`--app`) og vi har bedt om en spesifikk versjon av
-Python.
+Python. Vi ber spesifikt om Python versjon `3.12` for å forsikre oss om at du
+kjører samme versjon av Python som vi antar for denne workshopen.
 
 ::: {.callout-note collapse="true"}
 ## Hva betyr "applikasjons"-oppsett?
