@@ -46,8 +46,9 @@ Smil til noen du er glad i!
 
 For kode vil vi utheve med følgende bokser:
 ```bash
-python3 -c "print('Hello world!')"
+python3 -c "print('Hello world!')" # <1>
 ```
+1. Dette er en forklarende kommentar.
 
 ::: {.column-margin}
 Legg merke til at alle kodeboksene har et lite ikon for utklippstavle øverst i
@@ -55,4 +56,8 @@ høyre hjørne, når du tar musepekeren over boksen.
 
 Skulle du trenger å kopier alt som står i en boks 😉.
 :::
+
+Dessverre så kan tallet som vises for kommentarer i kode havne over selve koden.
+Dette gjør det vanskelig å lese koden under tallet. En løsning er å kopiere ut
+teksten til en annen flate da tallene ikke blir med kopiering 🫥
 
