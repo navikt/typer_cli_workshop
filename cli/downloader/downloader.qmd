@@ -42,7 +42,7 @@ derfra.
 I `main.py` ta inn et argument som er en nettside som brukeren ønsker å laste
 ned. Vi starter enkelt og tar inn bare én nettside og tar den inn som `str`.
 
-Skriv deretter ut nettsiden med `console`.
+Skriv deretter ut navnet på nettsiden med `console`.
 :::
 
 ::: {.callout-note collapse="true"}
@@ -64,7 +64,7 @@ prøve å åpne for at bruker kan gi inn flere nettsider på kommandolinjen.
 I `main.py` ta inn et argument som er en liste med nettsider som brukeren ønsker
 å laste ned.
 
-Skriv deretter ut nettsidene med `console`.
+Skriv deretter ut navnene på nettsidene med `console`.
 :::
 
 ::: {.callout-caution collapse="true"}
