@@ -161,7 +161,7 @@ def main(name: str, formal: bool = False) -> None:
 ```
 
 ::: {.column-margin}
-Vi kan nå også fjerne linjen med
+🗒️ Vi kan nå også fjerne linjen med
 
 ```python
 from rich import print
