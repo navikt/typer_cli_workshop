@@ -43,7 +43,7 @@ def main(
     with Progress(console=console) as progress:
         task = progress.add_task("Nettsider lastet ned", total=len(webpages))
         for webpage in webpages:
-            page_response = httpx.get("https://" + webpage)
+            page_response = httpx.get("https://" + webpage, follow_redirects=True)
             if page_response.status_code != 200:
                 console.print(f"[red] Klarte ikke å laste ned [bold]{webpage}[/bold]!")
             else:

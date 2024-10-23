@@ -190,7 +190,7 @@ def main(webpages: list[str]) -> None:
     with Progress(console=console) as progress:
         task = progress.add_task("Nettsider lastet ned", total=len(webpages))
         for webpage in webpages:
-            page_response = httpx.get("https://" + webpage) # <1>
+            page_response = httpx.get("https://" + webpage, follow_redirects=True) # <1>
             if page_response.status_code != 200: # <2>
                 console.print(f"[red] Klarte ikke å laste ned [bold]{webpage}[/bold]!")
             else:
@@ -205,7 +205,8 @@ def main(webpages: list[str]) -> None:
             progress.advance(task, advance=1)
 ```
 1. Vi kjører en `GET` mot nettsiden, merk at vi her hardkoder `https://` for å
-gjøre det enkelt for oss selv.
+gjøre det enkelt for oss selv. Vi setter også `follow_redirects=True` slik at
+verktøyet vil laste ned sider som `vg.no` uten at vi må legge til `www.vg.no`.
 2. Sjekk at bruker faktisk ga oss en nettside vi kunne nå.
 3. Prøv å hente størrelse på nettsiden for fremdriftsindikator.
 4. Åpne fil og skriv bolker med data.
@@ -248,7 +249,7 @@ def main(webpages: list[str], folder: pathlib.Path | None = None) -> None: # <2>
     with Progress(console=console) as progress:
         task = progress.add_task("Nettsider lastet ned", total=len(webpages))
         for webpage in webpages:
-            page_response = httpx.get("https://" + webpage)
+            page_response = httpx.get("https://" + webpage, follow_redirects=True)
             if page_response.status_code != 200:
                 console.print(f"[red] Klarte ikke å laste ned [bold]{webpage}[/bold]!")
             else:
@@ -431,7 +432,7 @@ def main(
     with Progress(console=console) as progress:
         task = progress.add_task("Nettsider lastet ned", total=len(webpages))
         for webpage in webpages:
-            page_response = httpx.get("https://" + webpage)
+            page_response = httpx.get("https://" + webpage, follow_redirects=True)
             if page_response.status_code != 200:
                 console.print(f"[red] Klarte ikke å laste ned [bold]{webpage}[/bold]!")
             else:
