@@ -29,7 +29,7 @@ kjører samme versjon av Python som vi antar for denne workshopen.
 
 ::: {.callout-note collapse="true"}
 ## Hva betyr "applikasjons"-oppsett?
-`uv` kan opprette to forskjellige typer prosjekter for oss:
+`uv` kan opprette tre forskjellige typer prosjekter for oss:
 
 - Det ene oppsettet (biblioteksoppsett - `--lib`) er myntet for prosjekter som
 ønsker å kunne distribuere en pakke på [PyPI](https://pypi.org/). Dette er
@@ -38,6 +38,9 @@ gjerne prosjekter som det gir mening at andre kan importere i sin kode.
 enkeltstående applikasjoner som det ikke gir så mye mening å dele som en Python
 pakke, men kanskje skal fungere som et selvstendig verktøy (dette oppsettet er
 også default med `uv init`).
+- Det tredje oppsette er [(pakke - `--package`) laget for
+kommandolinje-verktøy](https://docs.astral.sh/uv/concepts/projects/#packaged-applications).
+(Dette alternativet kom etter at denne workshopen ble ferdigstilt...🥺)
 :::
 
 ## Installere avhengigheter
