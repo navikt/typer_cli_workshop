@@ -82,8 +82,12 @@ leggTil a = a + 1
 
 ```js
 console.log(new Array(5).join("a"-10) + " Batman!")
+```
 
-// Skriver ut 'NaNNaNNaNNaN Batman!'
+. . .
+
+```{.txt code-line-numbers="false"}
+NaNNaNNaNNaN Batman!
 ```
 
 ## Typer i Python
