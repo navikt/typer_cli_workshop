@@ -217,6 +217,15 @@ def skriv_ut(
         print(element)
 ```
 
+. . .
+
+<br/>
+
+```python
+def legg_til(a: int | float) -> float:
+  return a + 1.0
+```
+
 ## What's in it for me?
 
 ### What's in it for me?
